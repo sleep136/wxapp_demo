@@ -1,0 +1,46 @@
+<!--pages/intelligent_customer_service/intelligent_customer_service.wxml-->
+<text>智能客服</text>
+<scroll-view
+        style="height:{{height}}vh;width: 100vw;display: flex;  position: relative;flex-direction: column;top:{{top?top:0}}px;"
+        scroll-y="true"
+        scroll-top="{{scrollTopVal}}"
+        bindtap="resetInputStatus">
+        <view wx:for="{{chatItems}}" wx:key="index">
+          <view class="chat-item-row">
+          <view class="chat-item-me" wx:if="{{item.role=='me'}}">
+              <image class="chat-avatar" src="/static/img/avatar.png"></image>
+              <view class="message-body-me">
+                  <view class="message-text">{{item.content}}</view>
+              </view>
+          </view> 
+          <view class="chat-item-he" wx:elif="{{item.role=='he'}}">
+              <image class="chat-avatar" src="/static/img/avatar.png"></image>
+              <view class="message-body-me">
+                  <view class="message-text">{{item.content}}</view>
+              </view>
+          </view> 
+        <view class="chat-item-time" wx:else>{{item.content}}</view>
+        </view>
+ 
+  </view>
+        
+       
+
+</scroll-view>
+
+
+<view class="footer-input-box">
+    <view class="footer-input-body">
+      <!-- <image src="/static/chat/voice.png" class="mp3-btn" bindtap="showLy"></image> -->
+      <button class="luyingBtn" wx:if="{{luYing}}">按住说话</button>
+      <input class="chat-input-style" bindinput="setMessage" wx:else></input>
+      <view class="chat-input-send-button-style" wx:if="{{textMessage}}" bindtap="sendJsonText">发送</view>
+      <!-- <image src="/static/chat/extra.png" class="more-btn" wx:else bindtap="showBox"></image> -->
+    </view>
+    <view class="extra-super" wx:if="{{isShow}}">
+        <view class="flex-column" bindtap="sendImg">
+          <!-- <image class="extra-image-size" src="/static/chat/choose_picture.png" ></image> -->
+          <text class="extra-text-size">图片</text>
+        </view>
+    </view>
+</view>

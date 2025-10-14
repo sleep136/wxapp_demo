@@ -1,0 +1,5 @@
+<!--pages/homepage/homepage.wxml-->
+<!--<text>pages/homepage/homepage.wxml</text>-->
+<text>当前时间：{{time}}</text>
+<view><button bindtap="bindViewCustomerService">智能客服</button>
+<button>财务处联系方式</button></view>
