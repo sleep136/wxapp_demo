@@ -47,7 +47,7 @@ Page({
        
       chatItems:[...this.data.chatItems, {"type":"msg", role:"me", content:this.data.textMessage}]
     })
-
+    this.getAnswer()
   },
   //显示和隐藏上传图片的功能
   showBox(e){
@@ -87,6 +87,32 @@ Page({
   //上传并发送图片
   sendImg(){
     
-  }
+  },
+  getAnswer(){
 
+  
+  wx.request({
+
+    url:'http://172.30.112.1:5000/get_answer',
+    data: { query:this.data.textMessage },
+
+    success: function(res) {
+  
+      console.log(res)// 服务器回包信息
+  
+    },fail: function (res) {
+
+        wx.showToast({ title: '系统错误' })
+
+      },
+
+      complete: function (res) {
+
+        wx.hideLoading()
+
+      }
+      
+  
+  })
+  }
 });
