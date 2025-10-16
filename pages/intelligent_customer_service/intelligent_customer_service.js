@@ -90,16 +90,19 @@ Page({
   },
   getAnswer(){
 
-  
+  var that =this
   wx.request({
 
-    url:'http://172.30.112.1:5000/get_answer',
+    url:'http://127.0.0.1:5000/get_answer',
     data: { query:this.data.textMessage },
-
+    header: {
+        'content-type': 'application/x-www-form-urlencoded; charset=GBK' // 指定编码为GBK
+      },
     success: function(res) {
   
-      console.log(res)// 服务器回包信息
-  
+      console.log(res),// 服务器回包信息
+      console.log(that),
+      that.append_record("he",res.data)
     },fail: function (res) {
 
         wx.showToast({ title: '系统错误' })
@@ -114,5 +117,10 @@ Page({
       
   
   })
+  },
+  append_record(role,data){
+    this.setData({
+        chatItems:[...this.data.chatItems, {"type":"msg", role:role, content:data}]
+      })
   }
 });
